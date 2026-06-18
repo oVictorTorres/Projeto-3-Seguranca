@@ -21,7 +21,7 @@
 		<mapstruct.version>1.6.3</mapstruct.version>
 		<lombok.version>1.18.38</lombok.version>
 		<bouncycastle.version>1.84</bouncycastle.version>
-		<dependency-check-maven.version>12.1.0</dependency-check-maven.version>
+		<dependency-check-maven.version>12.2.2</dependency-check-maven.version>
 	</properties>
 
 	<dependencies>
