@@ -12,6 +12,7 @@ import com.example.backend.security.UserKeyEncryptionService;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
 import org.apache.pdfbox.pdmodel.interactive.digitalsignature.PDSignature;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -91,6 +92,9 @@ class PdfSigningServiceTests {
             assertThat(signature.getFilter()).isEqualTo(PDSignature.FILTER_ADOBE_PPKLITE.getName());
             assertThat(signature.getSubFilter()).isEqualTo(PDSignature.SUBFILTER_ADBE_PKCS7_DETACHED.getName());
             assertThat(signature.getContents(result.pdfBytes())).isNotEmpty();
+            assertThat(signedDocument.getPage(0).getAnnotations())
+                    .extracting(PDAnnotation::getAppearance)
+                    .anySatisfy(appearance -> assertThat(appearance.getNormalAppearance()).isNotNull());
         }
 
         ArgumentCaptor<DocumentSignature> captor = ArgumentCaptor.forClass(DocumentSignature.class);
